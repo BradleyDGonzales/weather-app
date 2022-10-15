@@ -1,0 +1,122 @@
+@font-face {
+    font-family: 'quicksandlight';
+    src: url('../src/fonts/quicksand-light-webfont.woff2') format('woff2'),
+         url('../src/fonts/quicksand-light-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+body {
+    min-height: 100vh;
+    min-width: 100vw;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    background: url(../src/icons/new-bg4.png);
+    font-family: 'quicksandlight', 'Courier New', Courier, monospace;
+    font-weight: 900;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+
+}
+header {
+    background-color: rgba(22,78,99, 0.85);
+    padding-bottom: 0.5rem;
+}
+.title {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 2rem;
+    font-size: 32px;
+    color: white;
+    font-weight: 900;
+}
+#weatherCardExtras,
+#weatherCard,
+#myForm {
+    margin-left: 2rem;
+    margin-top: 2rem;
+}
+#myForm {
+    position: absolute;
+    top: 8em;
+    left: 1em;
+}
+#placeinput {
+    padding: 6px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 12px;
+    font-family: 'quicksandlight', 'Courier New', Courier, monospace;
+    font-weight: 900;
+
+}
+::placeholder {
+    opacity: 0.5;
+    color: black;
+}
+#weatherCardExtras,
+#weatherCard {
+    display: flex;
+    flex-direction: column;
+    color: white;
+    width: fit-content;
+    height: fit-content;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+    border-radius: 24px;
+}
+#sunRiseDiv,
+#sunSetDiv,
+#moonRiseDiv,
+#moonSetDiv,
+#moonPhaseDiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+#weatherPlace {
+    font-size: 3em;
+    width: fit-content;
+}
+#timestamp {
+    position: relative;
+    bottom: 3.5em;
+}
+#icon {
+    position: relative;
+    bottom: 5em;
+}
+#weatherScale,
+#weatherTemp {
+    grid-column: 1 / span 3;
+}
+#weatherInfo {
+    display: grid;
+    font-size: 32px;
+    grid-template-columns: 100px;
+    width: fit-content;
+    justify-items: center;
+    position: relative;
+    bottom: 3em
+}
+#weatherDesc {
+    grid-row-start: 3;
+    grid-column: 1 / span 3;
+}
+.mySpan {
+    cursor: pointer;
+}
+.mySpan.active {
+    cursor: default;
+    text-decoration-line: underline;
+}
+.mainWeather {
+    display: flex;
+    justify-content: space-between;
+}
