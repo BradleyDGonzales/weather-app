@@ -1,5 +1,7 @@
-import { getWeather, defaultWeather, getForecast } from './weather';
-import { changeSymbols } from './displayData';
+import {
+  getWeather, defaultWeather, getForecast, flag,
+} from './weather';
+import { changeSymbols, changeForecastSymbols } from './displayData';
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-console */
 window.onload = defaultWeather();
@@ -9,7 +11,15 @@ const placeInput = document.getElementById('placeinput');
 submitInput.addEventListener('click', async (e) => {
   e.preventDefault();
   await getWeather(placeInput.value);
-  getForecast(placeInput.value);
+  if (!flag) {
+    getForecast(placeInput.value);
+  }
+});
+placeInput.addEventListener('keypress', (e) => {
+  if (e.key === 'Enter') {
+    e.preventDefault();
+    submitInput.click();
+  }
 });
 document.addEventListener('click', (e) => {
   const spanClass = e.target.className;
@@ -18,5 +28,9 @@ document.addEventListener('click', (e) => {
       changeSymbols();
     }
   }
-  // if (e.target.classN
+  if (spanClass.includes('forecastSpan')) {
+    if (spanClass === 'forecastSpan') {
+      changeForecastSymbols();
+    }
+  }
 });

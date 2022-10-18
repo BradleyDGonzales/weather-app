@@ -8,9 +8,51 @@
 // eslint-disable-next-line import/prefer-default-export
 import {
   weatherCity, weatherCountry, tempF, tempMaxF, tempMinF, tempC, tempMaxC, tempMinC, latitude, longitude, weatherDesc, windSpeed, windDeg, humidity, icon, timestamp,
-  sunRise, sunSet, moonRise, moonSet, moonPhase, chanceOfRain, windMPH, windDir,
+  sunRise, sunSet, moonRise, moonSet, moonPhase, chanceOfRain, windMPH, windDir, forecastDayArray,
 } from './weather';
 
+export function displayForecastData() {
+  const forecastCard = document.querySelector('.fiveDayForecast');
+  let child = forecastCard.lastElementChild;
+  while (child) {
+    forecastCard.removeChild(child);
+    child = forecastCard.lastElementChild;
+  }
+  for (let i = 0; i < 5; i++) {
+    const newForecastCard = document.createElement('div');
+    newForecastCard.classList.add('forecastCard');
+    const newForecastCardDate = document.createElement('p');
+    newForecastCardDate.id = 'forecastDate';
+    newForecastCardDate.textContent = forecastDayArray[i].forecastDate;
+    const newForecastCardIcon = document.createElement('img');
+    newForecastCardIcon.id = 'forecastIcon';
+    newForecastCardIcon.src = `https://${forecastDayArray[i].icon}`;
+    const newForecastCardTemp = document.createElement('p');
+    newForecastCardTemp.id = 'forecastTemp';
+    newForecastCardTemp.textContent = `${forecastDayArray[i].avgTempF}°F`;
+    const newForecastCardScale = document.createElement('p');
+    newForecastCardScale.id = 'forecastScale';
+    const span = document.createElement('span');
+    span.classList.add('forecastSpan');
+    span.classList.add('active');
+    span.textContent = '°F';
+    const spanTwo = document.createElement('span');
+    spanTwo.classList.add('forecastSpan');
+    spanTwo.textContent = '°C';
+    const newForecastCardDesc = document.createElement('p');
+    newForecastCardDesc.id = 'forecastDesc';
+    newForecastCardDesc.textContent = forecastDayArray[i].condition;
+    forecastCard.appendChild(newForecastCard);
+    newForecastCard.appendChild(newForecastCardDate);
+    newForecastCard.appendChild(newForecastCardIcon);
+    newForecastCard.appendChild(newForecastCardTemp);
+    newForecastCard.appendChild(newForecastCardScale);
+    newForecastCardScale.appendChild(span);
+    span.after(' | ');
+    newForecastCardScale.appendChild(spanTwo);
+    newForecastCard.appendChild(newForecastCardDesc);
+  }
+}
 export function displayFData() {
   // append weatherCard
   const weatherPlaceName = `${weatherCity}, ${weatherCountry}`;
@@ -129,16 +171,22 @@ export function displayFData() {
   }
   const weatherCardWindDiv = document.createElement('div');
   weatherCardWindDiv.id = 'windDiv';
+  const weatherCardWindImage = document.createElement('img');
+  weatherCardWindImage.src = '../src/icons/weather-windy.png';
   const weatherCardWind = document.createElement('p');
   weatherCardWind.id = 'weatherCardWind';
   weatherCardWind.textContent = `Wind speed: ${windMPH}mph`;
   const weatherCardHumidityDiv = document.createElement('div');
   weatherCardHumidityDiv.id = 'humidityDiv';
+  const weatherCardHumidityImage = document.createElement('img');
+  weatherCardHumidityImage.src = '../src/icons/humidity.png';
   const weatherCardHumidity = document.createElement('p');
   weatherCardHumidity.id = 'weatherCardHumidity';
   weatherCardHumidity.textContent = `Humidity: ${humidity}%`;
   const weatherCardRainDiv = document.createElement('div');
   weatherCardRainDiv.id = 'rainDiv';
+  const weatherCardRainImage = document.createElement('img');
+  weatherCardRainImage.src = '../src/icons/rain.png';
   const weatherCardRain = document.createElement('p');
   weatherCardRain.id = 'weatherCardRain';
   weatherCardRain.textContent = `Rain chance: ${chanceOfRain}%`;
@@ -159,11 +207,98 @@ export function displayFData() {
   weatherCardMoonPhaseDiv.appendChild(weatherCardMoonImage);
   weatherCardMoonPhaseDiv.appendChild(weatherCardMoonPhase);
   weatherCardExtras.appendChild(weatherCardWindDiv);
+  weatherCardWindDiv.appendChild(weatherCardWindImage);
   weatherCardWindDiv.appendChild(weatherCardWind);
   weatherCardExtras.appendChild(weatherCardHumidityDiv);
+  weatherCardHumidityDiv.appendChild(weatherCardHumidityImage);
   weatherCardHumidityDiv.appendChild(weatherCardHumidity);
   weatherCardExtras.appendChild(weatherCardRainDiv);
+  weatherCardRainDiv.appendChild(weatherCardRainImage);
   weatherCardRainDiv.appendChild(weatherCardRain);
+}
+export function displayForecastFData() {
+  const forecastCard = document.querySelector('.fiveDayForecast');
+  let child = forecastCard.lastElementChild;
+  while (child) {
+    forecastCard.removeChild(child);
+    child = forecastCard.lastElementChild;
+  }
+  for (let i = 0; i < 5; i++) {
+    const newForecastCard = document.createElement('div');
+    newForecastCard.classList.add('forecastCard');
+    const newForecastCardDate = document.createElement('p');
+    newForecastCardDate.id = 'forecastDate';
+    newForecastCardDate.textContent = forecastDayArray[i].forecastDate;
+    const newForecastCardIcon = document.createElement('img');
+    newForecastCardIcon.id = 'forecastIcon';
+    newForecastCardIcon.src = `https://${forecastDayArray[i].icon}`;
+    const newForecastCardTemp = document.createElement('p');
+    newForecastCardTemp.id = 'forecastTemp';
+    newForecastCardTemp.textContent = `${forecastDayArray[i].avgTempF}°F`;
+    const newForecastCardScale = document.createElement('p');
+    newForecastCardScale.id = 'forecastScale';
+    const span = document.createElement('span');
+    span.classList.add('forecastSpan');
+    span.classList.add('active');
+    span.textContent = '°F';
+    const spanTwo = document.createElement('span');
+    spanTwo.classList.add('forecastSpan');
+    spanTwo.textContent = '°C';
+    const newForecastCardDesc = document.createElement('p');
+    newForecastCardDesc.id = 'forecastDesc';
+    newForecastCardDesc.textContent = forecastDayArray[i].condition;
+    forecastCard.appendChild(newForecastCard);
+    newForecastCard.appendChild(newForecastCardDate);
+    newForecastCard.appendChild(newForecastCardIcon);
+    newForecastCard.appendChild(newForecastCardTemp);
+    newForecastCard.appendChild(newForecastCardScale);
+    newForecastCardScale.appendChild(span);
+    span.after(' | ');
+    newForecastCardScale.appendChild(spanTwo);
+    newForecastCard.appendChild(newForecastCardDesc);
+  }
+}
+export function displayForecastCData() {
+  const forecastCard = document.querySelector('.fiveDayForecast');
+  let child = forecastCard.lastElementChild;
+  while (child) {
+    forecastCard.removeChild(child);
+    child = forecastCard.lastElementChild;
+  }
+  for (let i = 0; i < 5; i++) {
+    const newForecastCard = document.createElement('div');
+    newForecastCard.classList.add('forecastCard');
+    const newForecastCardDate = document.createElement('p');
+    newForecastCardDate.id = 'forecastDate';
+    newForecastCardDate.textContent = forecastDayArray[i].forecastDate;
+    const newForecastCardIcon = document.createElement('img');
+    newForecastCardIcon.id = 'forecastIcon';
+    newForecastCardIcon.src = `https://${forecastDayArray[i].icon}`;
+    const newForecastCardTemp = document.createElement('p');
+    newForecastCardTemp.id = 'forecastTemp';
+    newForecastCardTemp.textContent = `${forecastDayArray[i].avgTempC}°C`;
+    const newForecastCardScale = document.createElement('p');
+    newForecastCardScale.id = 'forecastScale';
+    const span = document.createElement('span');
+    span.classList.add('forecastSpan');
+    span.textContent = '°F';
+    const spanTwo = document.createElement('span');
+    spanTwo.classList.add('forecastSpan');
+    spanTwo.classList.add('active');
+    spanTwo.textContent = '°C';
+    const newForecastCardDesc = document.createElement('p');
+    newForecastCardDesc.id = 'forecastDesc';
+    newForecastCardDesc.textContent = forecastDayArray[i].condition;
+    forecastCard.appendChild(newForecastCard);
+    newForecastCard.appendChild(newForecastCardDate);
+    newForecastCard.appendChild(newForecastCardIcon);
+    newForecastCard.appendChild(newForecastCardTemp);
+    newForecastCard.appendChild(newForecastCardScale);
+    newForecastCardScale.appendChild(span);
+    span.after(' | ');
+    newForecastCardScale.appendChild(spanTwo);
+    newForecastCard.appendChild(newForecastCardDesc);
+  }
 }
 export function displayCData() {
   const weatherPlaceName = `${weatherCity}, ${weatherCountry}`;
@@ -213,6 +348,21 @@ export function displayCData() {
   weatherInformation.appendChild(weatherDescription);
 }
 
+export function changeForecastSymbols() {
+  const selectSpan = document.querySelectorAll('.forecastSpan');
+  for (let i = 0; i < selectSpan.length; i++) {
+    if (selectSpan[i].className === 'forecastSpan active') {
+      selectSpan[i].classList.remove('active');
+      if (i === 0) {
+        displayForecastCData();
+        return;
+      } if (i > 0) {
+        displayForecastFData();
+        return;
+      }
+    }
+  }
+}
 export function changeSymbols() {
   const selectSpan = document.querySelectorAll('.mySpan');
   for (let i = 0; i < selectSpan.length; i++) {
@@ -220,8 +370,10 @@ export function changeSymbols() {
       selectSpan[i].classList.remove('active');
       if (i === 0) {
         displayCData();
+        return;
       } if (i > 0) {
         displayFData();
+        return;
       }
     }
   }
