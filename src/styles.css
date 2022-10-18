@@ -12,7 +12,7 @@ body {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    background: url(../src/icons/new-bg4.png);
+    background: url('../src/icons/new-bg4.png');
     font-family: 'quicksandlight', 'Courier New', Courier, monospace;
     font-weight: 900;
     background-repeat: no-repeat;
@@ -41,9 +41,13 @@ header {
     margin-top: 2rem;
 }
 #myForm {
+    display: flex;
+    align-items: center;
+    gap: 12px;
     position: absolute;
     top: 8em;
     left: 1em;
+
 }
 #placeinput {
     padding: 6px;
@@ -58,6 +62,10 @@ header {
     opacity: 0.5;
     color: black;
 }
+#weatherCardExtras {
+    margin-right: 2rem;
+}
+.forecastCard,
 #weatherCardExtras,
 #weatherCard {
     display: flex;
@@ -68,13 +76,17 @@ header {
     align-items: center;
     justify-content: center;
     padding: 12px;
+    background-color: rgba(22,78,99, 0.85);
     border-radius: 24px;
 }
 #sunRiseDiv,
 #sunSetDiv,
 #moonRiseDiv,
 #moonSetDiv,
-#moonPhaseDiv {
+#moonPhaseDiv,
+#windDiv,
+#humidityDiv,
+#rainDiv {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -109,9 +121,11 @@ header {
     grid-row-start: 3;
     grid-column: 1 / span 3;
 }
+.forecastSpan,
 .mySpan {
     cursor: pointer;
 }
+.forecastSpan.active,
 .mySpan.active {
     cursor: default;
     text-decoration-line: underline;
@@ -119,4 +133,17 @@ header {
 .mainWeather {
     display: flex;
     justify-content: space-between;
+}
+.fiveDayForecast {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    color: white;
+    gap: 64px;
+}
+.forecastCard {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
